@@ -95,7 +95,7 @@ static ssize_t device_write (struct file *filp, const char *buff, size_t len, lo
 	if (!tx) return 0;
 
 	/* copy userspace data to kernelspace */
-	r = copy_from_user (&tx->chan, buff, len);
+	r = raw_copy_from_user (&tx->chan, buff, len);
 
 	/* report new values to joystick device */
 	input_report_abs (tx->input_dev, ABS_X, tx->chan[0]);
